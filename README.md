@@ -1,16 +1,13 @@
-## Hi there 👋
+# AssistSpec: A High-Level Specification for Automatic Proof of Cache Coherence Protocols
 
-<!--
-**assistspec/assistspec** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## Overview
+AssistSpec provides an approach to hardware design and verification by generating formal specifications from abstract descriptions. This process facilitates RTL (Register Transfer Level) generation and accelerates the verification process through interactive theorem proving.
 
-Here are some ideas to get you started:
+## Quick Start
+To generate specification, run the following command:
+```sh
+./run.sh
+```
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## License
+This project is licensed under the MIT License. For detailed terms and conditions, please refer to the [LICENSE](LICENSE) file.

@@ -1,0 +1,87 @@
+{
+  "Category": "0",
+  "Request": [
+    {
+      "ReadNotSharedDirty": {
+        "Status": "I",
+        "Source": "RN0-F",
+        "Destination": "HN-F"
+      }
+    },
+    {
+      "ReadNoSnp": {
+        "Trigger": "ReadNotSharedDirty",
+        "Status": {"I": {"Requester": "I", "Other": "I"}},
+        "Permission": "Read",
+        "Source": "HN-F",
+        "Destination": "SN-F"
+      }
+    }
+  ],
+  "Response": [
+    {
+      "CompAck": {
+        "Source": "RN0-F",
+        "Destination": "HN-F"
+      }
+    },
+    {
+      "SnpResp_SC_Fwded_SC": {
+        "Trigger": "SnpNotSharedDirtyFwd",
+        "Fold": "CompData_SC",
+        "Transition": {"UC": "SC"},
+        "Source": "RN1-F",
+        "Destination": [
+          {"HN-F": {"Status": "UC", "Update": "SC", "Hold": "ReadNotSharedDirty"}},
+          {"RN0-F": {"Transition": {"UC": "SC"}}}
+        ]
+      }
+    }
+  ],
+  "Snoop": [
+    {
+      "SnpNotSharedDirtyFwd": {
+        "Trigger": "ReadNotSharedDirty",
+        "Status": {"I": {"Requester": "I", "Other": "UC"}},
+        "Permission": "Read",
+        "Source": "HN-F",
+        "Destination": "RN1-F"
+      }
+    }
+  ],
+  "Data": [
+    {
+      "CompData_UC": {
+        "Trigger": "ReadNoSnp",
+        "Hold": "ReadNotSharedDirty",
+        "Status": "I",
+        "Update": "UC",
+        "Source": "SN-F",
+        "Destination": {"RN0-F": {"Transition": {"I": "UC"}}}
+      }
+    },
+    {
+      "CompData_SC": {
+        "Trigger": "ReadNotSharedDirty",
+        "Status": ["C", "D"],
+        "Update": "SC",
+        "Source": "HN-F",
+        "Destination": "RN0-F"
+      }
+    },
+    {
+      "SnpRespData_SC_Fwded_SC": {
+        "Trigger": "SnpNotSharedDirtyFwd",
+        "Source": "RN1-F",
+        "Destination": "HN-F"
+      }
+    },
+    {
+      "SnpRespData_SC_PD_Fwded_SC": {
+        "Trigger": "SnpNotSharedDirtyFwd",
+        "Source": "RN1-F",
+        "Destination": "HN-F"
+      }
+    }
+  ]
+}
